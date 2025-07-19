@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  # SQL Server for categories
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=YourStrong@Passw0rd
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+    networks:
+      - shopping-network
+
+  # Elasticsearch for orders
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - shopping-network
+
+  # .NET API for categories
+  dotnet-api:
+    build:
+      context: ./dotnet-server
+      dockerfile: ../docker/Dockerfile.dotnet
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=ShoppingDB;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=true;
+    ports:
+      - "5000:5000"
+    depends_on:
+      - sqlserver
+    networks:
+      - shopping-network
+
+  # Node.js API for orders
+  node-api:
+    build:
+      context: ./node-server
+      dockerfile: ../docker/Dockerfile.node
+    environment:
+      - NODE_ENV=production
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - "3001:3001"
+    depends_on:
+      - elasticsearch
+    networks:
+      - shopping-network
+
+  # React frontend
+  react-app:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile.react
+    ports:
+      - "80:80"
+    depends_on:
+      - dotnet-api
+      - node-api
+    networks:
+      - shopping-network
+
+volumes:
+  sqlserver_data:
+  elasticsearch_data:
+
+networks:
+  shopping-network:
+    driver: bridge
