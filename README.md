@@ -1,47 +1,47 @@
 Shopping System - Ministry of Defense Assignment
-מערכת קניות - מטלת בית למשרד הביטחון
-סקירה כללית
-מערכת קניות מלאה הכוללת שלושה רכיבים עיקריים:
+Shopping System - Home Assignment for Ministry of Defense
+Overview
+A complete shopping system including three main components:
 
-צד לקוח - React + Redux Toolkit
-שרת קטגוריות - .NET 8 + Entity Framework + SQL Server
-שרת הזמנות - Node.js + Express + Elasticsearch
-ארכיטקטורת המערכת
-רכיבי המערכת
-1. צד הלקוח (React Application)
-טכנולוגיות: React 18, Redux Toolkit, TypeScript
+Client Side - React + Redux Toolkit
+Categories Server - .NET 8 + Entity Framework + SQL Server
+Orders Server - Node.js + Express + Elasticsearch
+System Architecture
+System Components
+1. Client Side (React Application)
+Technologies: React 18, Redux Toolkit, TypeScript
 UI Framework: shadcn/ui + Tailwind CSS
-תכונות:
-מסך רשימת קניות עם בחירת קטגוריות
-הוספת מוצרים לעגלה
-מסך סיכום הזמנה עם טופס פרטים
-ניהול מצב גלובלי עם Redux
-2. שרת קטגוריות (.NET 8)
-טכנולוגיות: ASP.NET Core 8, Entity Framework Core
-מסד נתונים: SQL Server
-תכונות:
-API RESTful לשליפת קטגוריות
-Seed data אוטומטי
+Features:
+Shopping list screen with category selection
+Adding products to cart
+Order summary screen with details form
+Global state management with Redux
+2. Categories Server (.NET 8)
+Technologies: ASP.NET Core 8, Entity Framework Core
+Database: SQL Server
+Features:
+RESTful API for fetching categories
+Automatic seed data
 CORS configuration
 Swagger documentation
-3. שרת הזמנות (Node.js)
-טכנולוגיות: Express.js, Elasticsearch Client
-מסד נתונים: Elasticsearch
-תכונות:
-שמירת הזמנות במבנה NoSQL
-חיפוש מתקדם בהזמנות
-Mapping מותאם אישית
-הוראות התקנה והרצה
-דרישות מקדימות
+3. Orders Server (Node.js)
+Technologies: Express.js, Elasticsearch Client
+Database: Elasticsearch
+Features:
+Saving orders in NoSQL structure
+Advanced search in orders
+Custom mapping
+Installation and Running Instructions
+Prerequisites
 Node.js 18+
 .NET 8 SDK
 Docker & Docker Compose
-SQL Server (או Docker container)
-Elasticsearch (או Docker container)
-התקנה מקומית
-1. הכנת הסביבה
+SQL Server (or Docker container)
+Elasticsearch (or Docker container)
+Local Installation
+1. Environment Setup
 # Clone the repository
-git clone https://github.com/gadbi/shopping-system.git
+git clone <repository-url>
 cd shopping-system
 
 # Install React dependencies
@@ -56,10 +56,10 @@ cd ..
 cd dotnet-server
 dotnet restore
 cd ..
-2. הרצת מסדי הנתונים
+2. Running Databases
 # Start databases with Docker Compose
 docker-compose up -d sqlserver elasticsearch
-3. הרצת השרתים
+3. Running Servers
 # Terminal 1: .NET API
 cd dotnet-server
 dotnet run
@@ -70,60 +70,60 @@ npm run dev
 
 # Terminal 3: React App
 npm start
-התקנה עם Docker
+Docker Installation
 # Build and run all services
 docker-compose up --build
 
 # Access the application at http://localhost
-ארכיטקטורת ענן - Azure
-רכיבים עיקריים
+Cloud Architecture - Azure
+Main Components
 1. Azure Kubernetes Service (AKS)
-תפקיד: פלטפורמת קונטיינרים מנוהלת
-יתרונות:
+Role: Managed container platform
+Benefits:
 Auto-scaling
 High availability
 Managed updates
-Integration עם Azure services
+Integration with Azure services
 2. Azure Front Door + CDN
-תפקיד: Global load balancer ו-CDN
-יתרונות:
-הפצת תוכן גלובלית
+Role: Global load balancer and CDN
+Benefits:
+Global content distribution
 SSL termination
 DDoS protection
 Caching strategies
 3. Application Gateway + WAF
-תפקיד: Layer 7 load balancer עם אבטחה
-יתרונות:
+Role: Layer 7 load balancer with security
+Benefits:
 Web Application Firewall
 SSL offloading
 URL-based routing
 Health probes
 4. Azure SQL Database
-תפקיד: מסד נתונים יחסי מנוהל
-יתרונות:
+Role: Managed relational database
+Benefits:
 Automatic backups
 Point-in-time restore
 Built-in security
 Performance insights
 5. Azure Cosmos DB
-תפקיד: מסד נתונים NoSQL מנוהל
-יתרונות:
+Role: Managed NoSQL database
+Benefits:
 Global distribution
 Multiple APIs (MongoDB, Cassandra)
 Automatic scaling
 SLA guarantees
 6. Azure Container Registry (ACR)
-תפקיד: רישום קונטיינרים פרטי
-יתרונות:
+Role: Private container registry
+Benefits:
 Geo-replication
 Security scanning
-Integration עם AKS
+Integration with AKS
 Webhook support
-אבטחה
+Security
 1. Azure Key Vault
-שמירת סודות, מפתחות ותעודות
+Storage of secrets, keys and certificates
 Managed identities integration
-Access policies ו-RBAC
+Access policies and RBAC
 Audit logging
 2. Microsoft Defender for Cloud
 Security posture management
@@ -135,7 +135,7 @@ Identity and access management
 Multi-factor authentication
 Conditional access policies
 Application registration
-ניטור ולוגים
+Monitoring and Logs
 1. Azure Monitor
 Metrics collection
 Custom dashboards
@@ -145,13 +145,13 @@ Performance insights
 Centralized logging
 KQL queries
 Log retention policies
-Integration עם monitoring tools
+Integration with monitoring tools
 3. Application Insights
 Application performance monitoring
 Dependency tracking
 Exception tracking
 User analytics
-DevOps ואוטומציה
+DevOps and Automation
 1. Azure DevOps
 Pipelines: CI/CD automation
 Repos: Source control
@@ -193,7 +193,7 @@ stages:
                   inputs:
                     action: 'deploy'
                     manifests: 'k8s/*.yaml'
-תצורת Kubernetes
+Kubernetes Configuration
 Deployment Examples
 # React App Deployment
 apiVersion: apps/v1
@@ -222,7 +222,7 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "200m"
-עלויות ואופטימיזציה
+Cost and Optimization
 1. Cost Management
 Azure Cost Management + Billing
 Budget alerts
@@ -233,11 +233,14 @@ Auto-scaling policies
 Resource right-sizing
 CDN optimization
 Database performance tuning
-קישורים חשובים
+Important Links
+GitHub Repository: [Link to repository]
+Azure DevOps Project: [Link to project]
+Monitoring Dashboard: [Link to dashboard]
+Documentation: [Link to docs]
+Contact
+For additional questions or clarifications, please contact:
 
-צור קשר
-לשאלות נוספות או הבהרות, אנא פנו אל:
-
-Email: gad.biran@outlook.co.il
-Phone: 0534222056
-הערה: מערכת זו פותחה במיוחד עבור מטלת הבית של משרד הביטחון ומכילה את כל הדרישות הטכניות שהוגדרו.
+Email: [your-email@example.com]
+Phone: [your-phone-number]
+Note: This system was developed specifically for the Ministry of Defense home assignment and contains all the technical requirements that were defined.
