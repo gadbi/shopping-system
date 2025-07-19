@@ -41,7 +41,7 @@ Elasticsearch (או Docker container)
 התקנה מקומית
 1. הכנת הסביבה
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/gadbi/shopping-system.git
 cd shopping-system
 
 # Install React dependencies
