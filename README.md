@@ -234,13 +234,10 @@ Resource right-sizing
 CDN optimization
 Database performance tuning
 קישורים חשובים
-GitHub Repository: [Link to repository]
-Azure DevOps Project: [Link to project]
-Monitoring Dashboard: [Link to dashboard]
-Documentation: [Link to docs]
+
 צור קשר
 לשאלות נוספות או הבהרות, אנא פנו אל:
 
-Email: [your-email@example.com]
-Phone: [your-phone-number]
+Email: gad.biran@outlook.co.il
+Phone: 0534222056
 הערה: מערכת זו פותחה במיוחד עבור מטלת הבית של משרד הביטחון ומכילה את כל הדרישות הטכניות שהוגדרו.
